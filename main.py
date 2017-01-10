@@ -1,5 +1,5 @@
-# Created by: Mr. Coxall
-# Created on: Sep 2016
+# Created by: James Sanii
+# Created on: January 2017
 # Created for: ICS3U
 # This program is the first file in a multi-scene game template
 #    This template is meant to be used with the Xcode template,
