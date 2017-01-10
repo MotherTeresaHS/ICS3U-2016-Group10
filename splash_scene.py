@@ -26,7 +26,7 @@ class SplashScene(Scene):
         self.school_crest = SpriteNode('./assets/sprites/MT_Game_Studio.png',
                                        parent = self,
                                        position = self.size/2,
-                                       scale = 0.65)
+                                       size = self.size)
     
     def update(self):
         # this method is called, hopefully, 60 times a second
