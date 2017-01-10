@@ -1,25 +1,40 @@
-# Created by: Mr. Coxall
-# Created on: Sep 2016
+# Created by: James
+# Created on: Dec 2016
 # Created for: ICS3U
-# This scene shows the main menu.
+# This scene shows a splash screen for 2 seconds,
+#   then transitions to the main menu.
 
 from scene import *
 import ui
+import time
+
+from main_menu_scene import *
 
 
-class MainMenuScene(Scene):
+class LogoScene(Scene):
     def setup(self):
         # this method is called, when user moves to this scene
         
+        # create timer, so that after 2 seconds move to next scene
+        self.start_time = time.time()
+        
         # add MT blue background color
         self.background = SpriteNode(position = self.size / 2, 
-                                     color = 'white', 
+                                     color = (0.61, 0.78, 0.87), 
                                      parent = self, 
                                      size = self.size)
+        #add game logo
+        self.logo = SpriteNode('./assets/sprites/GemCrush.JPG',
+                                       parent = self,
+                                       position = self.size/2,
+                                       scale = 0.5)
     
     def update(self):
         # this method is called, hopefully, 60 times a second
-        pass
+        
+        # after 2 seconds, move to main menu scene
+        if not self.presented_scene and time.time() - self.start_time > 2:
+            self.present_modal_scene(MainMenuScene())
     
     def touch_began(self, touch):
         # this method is called, when user touches the screen
