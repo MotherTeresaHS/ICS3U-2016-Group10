@@ -8,7 +8,7 @@ from scene import *
 import ui
 import time
 
-from main_menu_scene import *
+from logo_scene import *
 
 
 class SplashScene(Scene):
@@ -26,14 +26,14 @@ class SplashScene(Scene):
         self.school_crest = SpriteNode('./assets/sprites/MT_Game_Studio.png',
                                        parent = self,
                                        position = self.size/2,
-                                       scale = 0.65)
+                                       size=self.size)
     
     def update(self):
         # this method is called, hopefully, 60 times a second
         
         # after 2 seconds, move to main menu scene
         if not self.presented_scene and time.time() - self.start_time > 2:
-            self.present_modal_scene(MainMenuScene())
+            self.present_modal_scene(LogoScene())
     
     def touch_began(self, touch):
         # this method is called, when user touches the screen
