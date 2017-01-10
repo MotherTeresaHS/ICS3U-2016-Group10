@@ -60,7 +60,7 @@ class MainMenuScene(Scene):
         if self.help_button.frame.contains_point(touch.location):
             self.present_modal_scene(HelpScene())
         
-        if self.scores_button.frame.contains_point(touch.location):
+        if self.credits_button.frame.contains_point(touch.location):
             self.present_modal_scene(CreditsScene())
     def did_change_size(self):
         # this method is called, when user changes the orientation of the screen
