@@ -1,4 +1,4 @@
-# Created by: Mr. Coxall
+# Created by: James Sanii
 # Created on: Sep 2016
 # Created for: ICS3U
 # This scene shows the main menu.
@@ -6,17 +6,37 @@
 from scene import *
 import ui
 
+from game_scene import *
+from help_scene import *
+from credits import *
 
 class MainMenuScene(Scene):
     def setup(self):
         # this method is called, when user moves to this scene
         
-        # add MT blue background color
+        # add background color
         self.background = SpriteNode(position = self.size / 2, 
                                      color = 'white', 
                                      parent = self, 
                                      size = self.size)
-    
+                                     
+        self.start_button = SpriteNode('./assets/sprites/start.png',
+                                       parent = self,
+                                       position = self.size/2)
+                                       
+        self.help_button_position = self.size/2
+        self.help_button_position.y = self.help_button_position.y - 200
+        self.help_button = SpriteNode('./assets/sprites/help.png',
+                                       parent = self,
+                                       position = self.help_button_position)
+        
+        self.credits_button_position = Vector2()
+        self.credits_button_position.y = self.size.y/1.3
+        self.credits_button_position.x = self.size.x/2
+        self.credits_button = SpriteNode('./assets/sprites/Credits.PNG',
+                                       parent = self,
+                                       position = self.credits_button_position,
+                                       scale = 3)
     def update(self):
         # this method is called, hopefully, 60 times a second
         pass
@@ -31,8 +51,17 @@ class MainMenuScene(Scene):
     
     def touch_ended(self, touch):
         # this method is called, when user releases a finger from the screen
-        pass
-    
+        
+        # if start button is pressed, goto game scene
+        if self.start_button.frame.contains_point(touch.location):
+            self.present_modal_scene(GameScene())
+            
+        # if start button is pressed, goto game scene
+        if self.help_button.frame.contains_point(touch.location):
+            self.present_modal_scene(HelpScene())
+        
+        if self.scores_button.frame.contains_point(touch.location):
+            self.present_modal_scene(CreditsScene())
     def did_change_size(self):
         # this method is called, when user changes the orientation of the screen
         # thus changing the size of each dimension
@@ -47,4 +76,3 @@ class MainMenuScene(Scene):
         # this method is called, when user place app from background 
         # back into use. Reload anything you might need.
         pass
-    
