@@ -1,40 +1,45 @@
-# Created by: James
-# Created on: Dec 2016
+# Created by: James Sanii
+# Created on: Sep 2016
 # Created for: ICS3U
-# This scene shows a splash screen for 2 seconds,
-#   then transitions to the main menu.
+# This scene shows the main menu.
 
 from scene import *
 import ui
-import time
 
-from main_menu_scene import *
+from game_scene import *
+from help_scene import *
+from credits import *
 
-
-class LogoScene(Scene):
+class MainMenuScene(Scene):
     def setup(self):
         # this method is called, when user moves to this scene
         
-        # create timer, so that after 2 seconds move to next scene
-        self.start_time = time.time()
-        
-        # add MT blue background color
+        # add background color
         self.background = SpriteNode(position = self.size / 2, 
-                                     color = (0.61, 0.78, 0.87), 
+                                     color = 'white', 
                                      parent = self, 
                                      size = self.size)
-        #add game logo
-        self.logo = SpriteNode('./assets/sprites/GemCrush.JPG',
+                                     
+        self.start_button = SpriteNode('./assets/sprites/start.png',
                                        parent = self,
-                                       position = self.size/2,
-                                       scale = 0.5)
-    
+                                       position = self.size/2)
+                                       
+        self.help_button_position = self.size/2
+        self.help_button_position.y = self.help_button_position.y - 200
+        self.help_button = SpriteNode('./assets/sprites/help.png',
+                                       parent = self,
+                                       position = self.help_button_position)
+        
+        self.credits_button_position = Vector2()
+        self.credits_button_position.y = self.size.y/1.3
+        self.credits_button_position.x = self.size.x/2
+        self.credits_button = SpriteNode('./assets/sprites/Credits.PNG',
+                                       parent = self,
+                                       position = self.credits_button_position,
+                                       scale = 3)
     def update(self):
         # this method is called, hopefully, 60 times a second
-        
-        # after 2 seconds, move to main menu scene
-        if not self.presented_scene and time.time() - self.start_time > 2:
-            self.present_modal_scene(MainMenuScene())
+        pass
     
     def touch_began(self, touch):
         # this method is called, when user touches the screen
@@ -46,8 +51,17 @@ class LogoScene(Scene):
     
     def touch_ended(self, touch):
         # this method is called, when user releases a finger from the screen
-        pass
-    
+        
+        # if start button is pressed, goto game scene
+        if self.start_button.frame.contains_point(touch.location):
+            self.present_modal_scene(GameScene())
+            
+        # if start button is pressed, goto game scene
+        if self.help_button.frame.contains_point(touch.location):
+            self.present_modal_scene(HelpScene())
+        
+        if self.scores_button.frame.contains_point(touch.location):
+            self.present_modal_scene(CreditsScene())
     def did_change_size(self):
         # this method is called, when user changes the orientation of the screen
         # thus changing the size of each dimension
@@ -62,4 +76,3 @@ class LogoScene(Scene):
         # this method is called, when user place app from background 
         # back into use. Reload anything you might need.
         pass
-    
