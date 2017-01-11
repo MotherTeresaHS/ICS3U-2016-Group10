@@ -27,7 +27,7 @@ class LogoScene(Scene):
         self.logo = SpriteNode('./assets/sprites/GemCrush.JPG',
                                        parent = self,
                                        position = self.size/2,
-                                       scale = 0.5)
+                                       size=self.size)
     
     def update(self):
         # this method is called, hopefully, 60 times a second
